@@ -1,0 +1,38 @@
+{% include 'base.html' %}
+{% include 'bar.html' %}
+{% block content %}
+<style>
+    .borrow{
+        background-color: aliceblue;
+        margin-top: 5%;
+        text-align: center;
+        max-height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+        border-style: groove;
+        border-width: 4px;
+    }
+</style>
+<form method="POST" class="borrow" >
+    {% csrf_token %}
+    <div>
+    <br>
+    <!--{{momo.as_p}}-->
+    {% for field in momo %}
+      <p class="form">
+
+          {{ field.label_tag }}<br>
+          {{ field }}
+
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    </div>
+    <br>
+    <button type="submit" style="font-weight: bold; margin-left: auto; margin-right: auto; padding: 10px; background-color: rgba(90, 238, 5, 0.979);">Borrow</button>
+
+</form>
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% include 'base.html' %}
+{% include 'bar.html' %}
+{% block content %}
+<style>
+    .delete{
+        border-style: groove;
+        border-width: 4px;
+        background-color: dimgray;
+        border-block-color: black;
+        width: 50%;
+        margin-left: 25%;
+        margin-top: 5%;
+        text-align: center;
+    }
+</style>
+
+
+<form method="POST" class="delete">
+    {% csrf_token %}
+    <h4>Are you sure you want to cancel your borrowing? "{{delete}}"</h1>
+    
+    <button style="padding: 2%;">
+        <a href="{% url 'profile' %}" style="text-decoration: none; font-weight: bold;">Cancel</a>
+    </button>
+    <input type="submit" name="Confirm" style="padding: 2%; background-color: aqua; font-weight: bold;">
+</form>
+
+{% endblock content %}

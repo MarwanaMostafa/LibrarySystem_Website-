@@ -1,0 +1,31 @@
+<style>
+ul
+{
+  list-style-type: none;
+  background-color: rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  opacity: 0.9;
+  height: 5vh;
+  margin: -8px;
+}
+li a
+{  
+  float: right;
+  font-size:large ;
+  text-decoration:none ;
+  color: aliceblue;
+  padding: 8px 20px;
+}
+</style>
+<div class="List">
+    <ul>
+      {% if user.is_superuser %}
+        <li><a href="/admin">Admin</a></li>
+      {% endif %}
+        <li><a href="{% url 'logout' %}">LogOut</a></li>
+        <li><a href="{% url 'profile' %}">{{user.username}}</a></li>
+        <li><a href="{% url 'book' %}">Borrow A Book</a></li>
+        <li><a href="{% url 'books' %}">Home</a></li>
+        
+    </ul>
+</div>

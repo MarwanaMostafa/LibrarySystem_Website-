@@ -1,0 +1,79 @@
+{% include 'base.html' %}
+{% include 'bar.html' %}
+
+{% block content %}
+<style>
+    p{
+        
+        font-size: large;
+        font-weight: bold;
+        padding-top: 50;
+        text-align: center;
+    }
+
+    .data{
+        border-style: groove;
+        border-width: 4px;
+        background-color: dimgray;
+        border-block-color: black;
+        width: 40%;
+        margin-left: auto;
+        margin-right: auto;           
+        max-height: 100%;
+        margin-top: 2.5%;
+
+    }
+    .borrow{
+        background-color: bisque;
+    }
+    .my-books{
+        background-color: dimgray;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5%;
+        width: 40%;
+        height: 150%;
+        border-style: groove;
+        border-width: 4px;
+    }
+    .mybooks{
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+        margin-top: 5%;
+        padding-top: 5%;
+        padding: 20px;
+        background-color:gainsboro;
+    }
+</style>
+
+
+<div class="data">
+    <p>Username: {{user.username}}</p>
+    <p>First name: {{user.first_name}}</p>
+    <p>Last name: {{user.last_name}}</p>
+    <p>Email: {{user.email}}</p>
+    <button type="button" style="margin-left: 40%; padding: 7; background-color: darkgreen;">
+        <a href="{% url 'editprofile' %}" style="text-decoration: none; color: white; font-weight: bold;">Update my profile</a>
+    </button>
+</div>
+
+<div class="my-books">
+    <h2 style="text-align: center; padding-top: 3%;">My Books</h2>
+    {% for mybook in mybooks %}
+    <div class="mybooks">
+        {% if mybook.name == request.user %}
+            <p>Name: {{mybook.book}} <br>
+            Period: {{mybook.period}} days</p>
+            <button type="button" style="margin-left: 10%; padding: 7; background-color: darkgreen;">
+                <a href="/extendPeriod/{{mybook.id}}" style="text-decoration: none; color: white; font-weight: bold;">Extend borrowing period</a>
+            </button>
+            
+            <button type="button" style="margin-left: 10%; padding: 7; background-color: red; margin-top: 1%;">
+                <a href="/delete/{{mybook.id}}" style="text-decoration: none; color: white; font-weight: bold;">Cancel borrowing</a>
+            </button>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

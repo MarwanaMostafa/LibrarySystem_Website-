@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .logout-page{
+        border-style: groove;
+        border-width: 4px;
+        background-color: dimgray;
+        border-block-color: black;
+        width: 50%;
+        margin-left: 25%;
+        text-align: center;
+    }
+</style>
+<form method="POST" class="logout-page">
+    {% csrf_token %}
+    <h1>Now you are Logged out</h1>
+    <h3>Do you want to log in?
+        <a href="{% url 'books' %}" style="color: blue; -webkit-text-stroke: 0.2px black;">Log In</a>
+    </h3>
+</form>
+{% endblock content %}

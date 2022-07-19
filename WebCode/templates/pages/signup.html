@@ -1,0 +1,63 @@
+
+{% include 'base.html' %}
+{% block content %}
+<style>
+  .signform{
+    background-color: black;
+    color: white;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 12;
+    width: 50%;
+    border-style: groove;
+    border: 0.3 gray;
+  }
+  .help-text{
+    margin-left: 160;
+    color: grey;
+  }
+  .form{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 50%;
+    padding: 7px;
+  }
+  .header{
+    margin-top: 23;
+    text-align: center;
+    color: cornflowerblue;
+  }
+</style>
+  <form method="post" class="signform" >
+    <h2 class="header">Sign up</h2>
+    {% csrf_token %}
+    {% for field in form %}
+      <p class="form">
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
+          
+            {% if 'Your' in field.help_text %}
+              <div class="help-text">
+                <small>{{ field.help_text }}</small>
+              </div>
+            {% else %}
+              <small style="color: grey;">{{ field.help_text }}</small>
+            {% endif %}
+        {% endif %}
+        
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    <button type="submit" style="margin-left: 46%; padding: 10px; font-weight: bold; background-color: rgb(21, 240, 13);">Sign up</button>
+    <button type="submit" style="margin-left: 38%; padding: 10px;">
+      <a href="/accounts/login" style="text-decoration: none; font-weight: bold;">Go back to the login page</a>
+    </button>
+  </form>
+{% endblock %}

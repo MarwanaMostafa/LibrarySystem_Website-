@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+
+        }
+        body {
+            text-align: center;
+        }
+        hr {
+            width: 20%;
+        }
+        .login-form{
+               border-style: groove;
+                border-width: 4px;
+               background-color: dimgray;
+               border-block-color: black;
+               width: 40%;
+               margin-left: auto;   
+               margin-right: auto;        
+               max-height: 100%;/*هنا احنا كبرنا الفورم علشان لما كان بيطلع ايرور كان بيبقى برا الفورم مش جوا */     
+        }
+    </style>
+</head>
+<html>
+
+<body>
+    <form method="POST" class="login-form">
+        {% csrf_token %}
+        <h1>Log In page</h1>
+        <div class="container">
+            <div class="st">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="username">
+            </div>
+            <br>
+            <div class="st">
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password">
+            </div>
+            <br>
+            <a href="/">
+                <input style="padding: 7;" type="submit" value="Log In">
+            </a>
+            {% for field in form %}
+                <p class="form">
+                    {% for error in field.errors %}
+                    <p style="color: red">{{ error }}</p>
+                    {% endfor %}
+                </p>
+            {% endfor %}
+
+        </div>
+        <hr>
+        <div class="log">
+            <p>you don't have an account? </p>
+            <button type="button">
+                <a href="{% url 'signup' %}" style="color: black;text-decoration: none; padding: 7;"> Sign up</a>
+            </button>
+        </div>
+
+    </form>
+</body>
+
+</html>
+{% endblock content %}
